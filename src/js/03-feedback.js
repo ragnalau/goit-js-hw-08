@@ -14,6 +14,7 @@ import throttle from 'lodash.throttle';
 const form = document.querySelector('.feedback-form');
 const STORAGE_KEY = 'feedback-form-state';
 
+// SAVING TO LOCAL STORAGE FUNCTION
 const saveToLocalStorage = throttle(() => {
     const dataForm = {
         email: form.elements.email.value,
@@ -24,6 +25,8 @@ const saveToLocalStorage = throttle(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
 }, 500);
 
+
+// LOAD FROM LOCAL STORAGE FUNCTION
 const loadFromLocalStorage = () => {
     const savedData = localStorage.getItem(STORAGE_KEY);
     if(savedData) {
@@ -33,9 +36,10 @@ const loadFromLocalStorage = () => {
     }
 }
 
-
+// EVENT WHEN TYPING IN INPUT
 form.addEventListener('input', saveToLocalStorage);
 
+// EVENT ON SUBMIT BUTTON
 form.addEventListener('submit', event => {
   event.preventDefault();
 
@@ -47,10 +51,13 @@ form.addEventListener('submit', event => {
   console.log('Form submitted with data:', formData);
 
 
+// DELETE LOAD LOCAL STORAGE AFTER SUBMIT
 //   localStorage.removeItem(STORAGE_KEY);
 
 
+// RESETING FORM
   form.reset();
 });
 
+// LOAD FROM LOCAL STORAGE CALL FUNCTION
 loadFromLocalStorage();
